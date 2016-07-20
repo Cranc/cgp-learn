@@ -5,6 +5,10 @@ fn main() {
 
     let t = Swagger { object: "yo".to_string() };
     println!("{}", t);
+
+    for i in Fib::new().take(20) {
+        println!("{}", i);
+    }
 }
 
 fn do_math<T: std::ops::Mul + std::ops::Add + Copy>
@@ -23,3 +27,26 @@ impl<T: fmt::Display> fmt::Display for Swagger<T> {
         write!(f, "swag {} yolo", self.object)
     }
 }
+
+struct Fib {
+    next: usize,
+    cur: usize,
+}
+
+impl Fib {
+    fn new() -> Fib {
+        Fib { next: 1, cur: 0 }
+    }
+}
+
+impl std::iter::Iterator for Fib {
+    type Item = usize;
+    fn next(&mut self) -> Option<usize> {
+        let temp = self.cur;
+        self.cur = self.next;
+        self.next += temp;
+
+        Some(temp)
+    }
+}
+
