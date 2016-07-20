@@ -1,9 +1,6 @@
-use std::ops::Mul;
-use std::ops::Add;
+use std::ops::{Mul,Add};
 
-use std::fmt::Result;
-use std::fmt::Display;
-use std::fmt::Formatter;
+use std::fmt::{Result, Display, Formatter};
 
 use std::iter::Iterator;
 
