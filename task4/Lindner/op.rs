@@ -1,4 +1,11 @@
-use std::fmt;
+use std::ops::Mul;
+use std::ops::Add;
+
+use std::fmt::Result;
+use std::fmt::Display;
+use std::fmt::Formatter;
+
+use std::iter::Iterator;
 
 fn main() {
     println!("do math result => {:?}", do_math(6, 3));
@@ -11,20 +18,20 @@ fn main() {
     }
 }
 
-fn do_math<T: std::ops::Mul + std::ops::Add + Copy>
+fn do_math<T: Mul + Add + Copy>
     (x: T,
      y: T)
-     -> (<T as std::ops::Add>::Output, <T as std::ops::Mul>::Output) {
+     -> (<T as Add>::Output, <T as Mul>::Output) {
     (x + y, x * y)
 }
 
-struct Swagger<T: fmt::Display> {
+struct Swagger<T: Display> {
     object: T,
 }
 
-impl<T: fmt::Display> fmt::Display for Swagger<T> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "swag {} yolo", self.object)
+impl<T: Display> Display for Swagger<T> {
+    fn fmt(&self, f: &mut Formatter) -> Result {
+        write!(f, "#swag {} #yolo", self.object)
     }
 }
 
@@ -39,7 +46,7 @@ impl Fib {
     }
 }
 
-impl std::iter::Iterator for Fib {
+impl Iterator for Fib {
     type Item = usize;
     fn next(&mut self) -> Option<usize> {
         let temp = self.cur;
